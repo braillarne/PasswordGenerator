@@ -10,9 +10,9 @@ import java.util.Scanner;
  */
 public class App
 {
+
     public static void main( String[] args )
     {
-        char[] JavaCharArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',', '!', '?', '%', '&', '-', '_'};
 
         Scanner sc = new Scanner(System.in);
         boolean valid = false;
@@ -80,6 +80,13 @@ public class App
         } while (!valid);
 
 
+        System.out.print(generatePassword(passLength, hasSpecial, hasNum, hasCapital));
+    }
+
+
+    static String generatePassword(int size, char special, char num, char capital){
+        char[] JavaCharArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',', '!', '?', '%', '&', '-', '_'};
+
         ArrayList<String> chars = new ArrayList<String>();
 
         //storing lowercase
@@ -88,7 +95,7 @@ public class App
             chars.add(Character.toString(JavaCharArray[i]));
         }
 
-        if (hasCapital == 'y') {
+        if (capital == 'y') {
 
             //storing uppercase
             for (int i = 26; i < 52; i++) {
@@ -96,7 +103,7 @@ public class App
             }
         }
 
-        if (hasNum=='y') {
+        if (num=='y') {
 
             //storing num
             for (int i = 52; i < 62; i++) {
@@ -104,7 +111,7 @@ public class App
             }
         }
 
-        if (hasSpecial=='y') {
+        if (special=='y') {
             //storing num
             for (int i = 62; i < JavaCharArray.length; i++) {
                 chars.add(Character.toString(JavaCharArray[i]));
@@ -113,14 +120,13 @@ public class App
 
         Random random = new Random();
 
-        ArrayList<String> password = new ArrayList<String>();
-        for (int i=0; i<passLength; i++){
-            password.add(chars.get(random.nextInt(chars.size())));
+        String password = "";
+
+        for (int i=0; i<size; i++){
+            password = password + chars.get(random.nextInt(chars.size()));
         }
 
-        System.out.println("Passord: ");
-        for (String c: password) {
-            System.out.print(c);
-        }
+        return password;
     }
+
 }
